@@ -1,11 +1,19 @@
+interface RepositoryProps {
+    repository: {
+        name: string;
+        description: string;
+        html_url: string;
+    };
+}
 
-export function RepositoryItem() {
+
+export function RepositoryItem(props : RepositoryProps) {
     return(
                 <li>
-                    <strong>unform</strong>
-                    <p>Forms in React</p>
+                    <strong>{props.repository.name}</strong>
+                    <p>{props.repository.description}</p>
 
-                    <a href="">
+                    <a href={props.repository.html_url}>
                         Acessar respositório
                     </a>
                 </li>

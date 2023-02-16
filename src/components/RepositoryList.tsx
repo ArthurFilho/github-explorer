@@ -3,9 +3,15 @@ import { RepositoryItem } from "./RepositoryItem";
 import "../styles/repositories.scss"
 import { useEffect, useState } from "react";
 
+interface Repositories {
+    name: string;
+    description: string;
+    html_url: string;
+}
+
 export function RepositoryList() {
     
-    const [ repositories, setRepositories ] = useState([]);
+    const [ repositories, setRepositories ] = useState<Repositories[]>([]);
 
     useEffect(() => {
          fetch('https://api.github.com/users/ArthurFilho/repos')
@@ -18,10 +24,11 @@ export function RepositoryList() {
             <h1>Lista de repositórios</h1>
 
             <ul>
-                <RepositoryItem />
-                <RepositoryItem />
-                <RepositoryItem />
-                <RepositoryItem />
+                {repositories.map((repository) => {
+                    return(
+                        <RepositoryItem key={repository.name} repository={repository} />
+                    )
+                })}
             </ul>
 
         </section>
